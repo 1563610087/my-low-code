@@ -8,7 +8,9 @@ const ConfigBox = defineComponent({
   render () {
     return (
       <>
-        <div className='config-box'>gggg</div>
+        <div className='config-box'>
+          
+        </div>
       </>
     )
   }
