@@ -2,7 +2,8 @@
   <div class="component">
     <el-tabs type="card">
       <el-tab-pane label="表单">
-        <el-scrollbar>
+        <!-- <el-scrollbar> -->
+        <div class="component-wrapper">
           <div
             class="component-group"
             v-for="item in formComponents"
@@ -16,12 +17,15 @@
                 :draggable="true"
                 @dragstart="onStart(item2)"
                 @dragend="onEnd(item2)"
+                @click="addComponent(item2)"
               >
-                {{ item2.label }}
+                {{ item2.__config__.label }}
               </div>
             </div>
           </div>
-        </el-scrollbar>
+        </div>
+
+        <!-- </el-scrollbar> -->
       </el-tab-pane>
       <el-tab-pane label="表格">Task</el-tab-pane>
     </el-tabs>
@@ -33,6 +37,7 @@ import {
   inputComponents,
   selectComponents,
 } from "@/common/config";
+import emitter from "@/common/utils.js";
 export default {
   data() {
     return {
@@ -60,12 +65,19 @@ export default {
     onEnd(data) {
       console.log(data, 2222);
     },
+    addComponent(data) {
+      emitter.emit("addComponent", data);
+    },
   },
 };
 </script>
 <style scoped lang='scss'>
 .component {
   flex: 0 0 280px;
+
+  &-wrapper{
+    width: 100%;
+  }
 
   &-group {
     padding: 0 10px 10px;
@@ -83,6 +95,7 @@ export default {
     height: 30px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     cursor: move;
     div {
       flex: 0 0 120px;
@@ -92,9 +105,9 @@ export default {
       font-size: 14px;
       color: #909399;
       background-color: #f6f7ff;
-      &:hover{
-      border:1px dashed #909399;
-    }
+      &:hover {
+        border: 1px dashed #909399;
+      }
     }
   }
 }
