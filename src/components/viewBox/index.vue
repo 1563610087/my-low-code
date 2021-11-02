@@ -15,7 +15,7 @@
         </el-row>
       </div>
     </div>
-    <div class="enpty-info" v-else>从左侧拖入或点选组件进行表单设计</div>
+    <el-empty v-else description="从左侧拖入或点选组件进行表单设计"></el-empty>
   </div>
 </template>
 <script>
@@ -51,15 +51,6 @@ export default {
   border-right: 1px solid #dcdfe6;
   display: flex;
   flex-direction: column;
-
-  .enpty-info {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    color: #ccb1ea;
-  }
 
   .content {
     flex: 1;

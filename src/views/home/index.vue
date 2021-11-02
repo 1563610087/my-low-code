@@ -14,17 +14,12 @@ import ComponentBox from "@/components/componentBox";
 import ConfigBox from "@/components/configBox/index.jsx";
 import ViewBox from "@/components/viewBox";
 export default {
-  data() {
-    return {};
-  },
   components: {
     Header,
     ComponentBox,
     ViewBox,
     ConfigBox
-  },
-  watch: {},
-  methods: {},
+  }
 };
 </script>
 <style scoped lang='scss'>

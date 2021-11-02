@@ -1,10 +1,10 @@
 <template>
   <div class="menu">
-    <el-button type="primary" size="small">预览</el-button>
-    <el-button type="primary" size="small">导出vue文件</el-button>
-    <el-button type="primary" size="small">复制代码</el-button>
-    <el-button type="primary" size="small">查看json</el-button>
-    <el-button type="primary" size="small" @click="clearData">清空</el-button>
+    <el-button type="primary" size="mini">预览</el-button>
+    <el-button type="primary" size="mini">导出vue文件</el-button>
+    <el-button type="primary" size="mini">复制代码</el-button>
+    <el-button type="primary" size="mini">查看json</el-button>
+    <el-button type="primary" size="mini" @click="clearData">清空</el-button>
   </div>
 </template>
 <script>
@@ -26,8 +26,8 @@ export default {
 </script>
 <style scoped lang='scss'>
 .menu {
-  flex: 0 0 50px;
-  line-height: 50px;
+  flex: 0 0 40px;
+  line-height: 40px;
   padding: 0 20px;
   border-bottom: 1px solid #dcdfe6;
 }
