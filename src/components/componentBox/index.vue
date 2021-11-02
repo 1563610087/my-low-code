@@ -19,7 +19,7 @@
                 @dragend="onEnd(item2)"
                 @click="addComponent(item2)"
               >
-                {{ item2.__config__.label }}
+                {{ item2.config.label }}
               </div>
             </div>
           </div>
@@ -92,19 +92,21 @@ export default {
   }
 
   &-item {
-    height: 30px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     cursor: move;
     div {
       flex: 0 0 120px;
+      margin:5px 0;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 14px;
       color: #909399;
       background-color: #f6f7ff;
+      box-sizing: border-box;
       &:hover {
         border: 1px dashed #909399;
       }
