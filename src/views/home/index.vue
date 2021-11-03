@@ -11,7 +11,7 @@
 <script>
 import Header from "@/components/header";
 import ComponentBox from "@/components/componentBox";
-import ConfigBox from "@/components/configBox/index.jsx";
+import ConfigBox from "@/components/configBox";
 import ViewBox from "@/components/viewBox";
 export default {
   components: {

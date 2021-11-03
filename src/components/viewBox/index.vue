@@ -20,12 +20,15 @@
 </template>
 <script>
 import Menu from "./menu.vue";
-import emitter from "@/common/utils.js";
-import FormItem from "./formItem.jsx";
+import emitter,{getId} from "@/common/utils.js";
+import FormItem from "./formItem.vue";
+import lodash from 'lodash'
 export default {
   data() {
     return {
       drawList: [],
+      currentItem:{},
+      index:null
     };
   },
   components: {
@@ -34,13 +37,30 @@ export default {
   },
   mounted() {
     emitter.on("addComponent", (data) => {
-      this.drawList.push(data);
+      const componentData=lodash.cloneDeep(data)
+      componentData.id=getId()
+      this.drawList.push(componentData)
+      this.currentItem=componentData
+      this.index=this.drawList.length-1
+    });
+    emitter.on("changeComponent", (data) => {
+      this.currentItem=data
+      this.drawList.splice(this.index,1,data)
     });
   },
-  watch: {},
+  watch: {
+    currentItem: {
+      handler: function (val){
+        emitter.emit('setComponent',val)
+      },
+      deep:true
+    }
+  },
   methods: {
     clear() {
-      this.drawList = [];
+      this.drawList = []
+      this.currentItem={}
+      this.index=null
     },
   },
 };

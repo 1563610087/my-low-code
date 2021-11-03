@@ -1,5 +1,6 @@
-import { defineComponent,h } from 'vue'
+import { defineComponent } from 'vue'
 import Render from './render'
+import './formItem.scss'
 const FormItem = defineComponent({
   name: 'hh',
   props: {
@@ -8,34 +9,29 @@ const FormItem = defineComponent({
       required: true
     }
   },
-  components:{
-    Render:Render
+  components: {
+    Render: Render
   },
   methods: {
     colFormItem() {
       const { config } = this.data
       let labelWidth = config.labelWidth ? `${config.labelWidth}px` : null
       return (
-        <el-col span={config.span}>
-          <el-form-item
-            label-width={labelWidth}
-            label={config.showLabel ? config.label : ''}
-            required={config.required}>
-              <Render data={this.data}/>
-          </el-form-item>
-        </el-col>
+        
       )
     }
   },
   render() {
     return (
-      <>
-        <div>
-          {
-            this.colFormItem()
-          }
-        </div>
-      </>
+      <div class='item-box'>
+        <div class='item-btn'>
+          <span>1</span>
+          <span>2</span>
+        </div >
+        {
+          this.colFormItem()
+        }
+      </div >
     )
   }
 

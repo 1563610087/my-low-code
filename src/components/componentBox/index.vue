@@ -54,8 +54,6 @@ export default {
       ],
     };
   },
-  components: {},
-  watch: {},
   methods: {
     //开始拖拽事件
     onStart(data) {
