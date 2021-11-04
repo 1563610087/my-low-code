@@ -2,33 +2,31 @@
   <div class="flex-1 view-box">
     <Menu />
     <div class="content" v-if="drawList.length !== 0">
-      <div>
+      <el-form size="mini">
         <el-row>
-          <el-form>
-            <FormItem
-              v-for="(item, index) in drawList"
-              :data="item"
-              :key="`${item.label}${index}`"
-            >
-            </FormItem>
-          </el-form>
+          <FormItem
+            v-for="(item, index) in drawList"
+            :data="item"
+            :key="`${item.label}${index}`"
+          >
+          </FormItem>
         </el-row>
-      </div>
+      </el-form>
     </div>
     <el-empty v-else description="从左侧拖入或点选组件进行表单设计"></el-empty>
   </div>
 </template>
 <script>
 import Menu from "./menu.vue";
-import emitter,{getId} from "@/common/utils.js";
+import emitter, { getId } from "@/common/utils.js";
 import FormItem from "./formItem.vue";
-import lodash from 'lodash'
+import lodash from "lodash";
 export default {
   data() {
     return {
       drawList: [],
-      currentItem:{},
-      index:null
+      currentItem: {},
+      index: null,
     };
   },
   components: {
@@ -37,30 +35,30 @@ export default {
   },
   mounted() {
     emitter.on("addComponent", (data) => {
-      const componentData=lodash.cloneDeep(data)
-      componentData.id=getId()
-      this.drawList.push(componentData)
-      this.currentItem=componentData
-      this.index=this.drawList.length-1
+      const componentData = lodash.cloneDeep(data);
+      componentData.id = getId();
+      this.drawList.push(componentData);
+      this.currentItem = componentData;
+      this.index = this.drawList.length - 1;
     });
     emitter.on("changeComponent", (data) => {
-      this.currentItem=data
-      this.drawList.splice(this.index,1,data)
+      this.currentItem = data;
+      this.drawList.splice(this.index, 1, data);
     });
   },
   watch: {
     currentItem: {
-      handler: function (val){
-        emitter.emit('setComponent',val)
+      handler: function (val) {
+        emitter.emit("setComponent", val);
       },
-      deep:true
-    }
+      deep: true,
+    },
   },
   methods: {
     clear() {
-      this.drawList = []
-      this.currentItem={}
-      this.index=null
+      this.drawList = [];
+      this.currentItem = {};
+      this.index = null;
     },
   },
 };
@@ -76,5 +74,9 @@ export default {
     flex: 1;
     padding: 20px;
   }
+}
+
+/deep/ .el-form-item {
+  margin-bottom: 0 !important;
 }
 </style>

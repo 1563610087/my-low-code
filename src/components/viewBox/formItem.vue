@@ -1,27 +1,22 @@
 <template>
-  <div class="item-box">
-    <div class="item-btn">
-      <el-icon>
-        <Delete></Delete>
-      </el-icon>
-      <el-icon>
-        <Plus></Plus>
-      </el-icon>
+  <el-col :span="24" class="item-box">
+    <el-form-item
+      :label-width="labelWidth"
+      :label="config.showLabel ? config.label : ''"
+      :required="config.required"
+    >
+      <Render :data="this.data" />
+    </el-form-item>
+    <div></div>
+    <div class="item-btn">     
+      <el-icon><Plus></Plus></el-icon>
+      <el-icon><Delete></Delete></el-icon>
     </div>
-    <el-col :span="config.span">
-      <el-form-item
-        :label-width="labelWidth"
-        :label="config.showLabel ? config.label : ''"
-        :required="config.required"
-      >
-        <Render :data="this.data" />
-      </el-form-item>
-    </el-col>
-  </div>
+  </el-col>
 </template>
 <script>
 import Render from "./render";
-import { Delete,Plus } from "@element-plus/icons";
+import { Delete, Plus } from "@element-plus/icons";
 export default {
   data() {
     return {};
@@ -29,7 +24,7 @@ export default {
   components: {
     Render,
     Delete,
-    Plus
+    Plus,
   },
   props: {
     data: {
@@ -55,10 +50,24 @@ export default {
 <style lang='scss' scoped>
 .item-box {
   position: relative;
+  height: 50px;
+  padding-top: 10px;
+  padding-right: 40px;
 
-  .item-btn {
-    position: absolute;
-    right: 0;
+  &:hover{
+    border: 1px dashed #909399;
+    cursor: move;
+  }
+}
+
+.item-btn {
+  position: absolute;
+  top: 15px;
+  right: 2px;
+  z-index: 20;
+
+  i{
+    cursor: pointer;
   }
 }
 </style>
