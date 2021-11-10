@@ -1,8 +1,13 @@
 <template>
   <div class="com-config">
-    <el-form ref="form" label-width="80px" size="mini" v-if="currentData.id!==undefined">
+    <el-form
+      ref="form"
+      label-width="80px"
+      size="mini"
+      v-if="currentData.id !== undefined"
+    >
       <el-form-item label="标签名:">
-        <el-input v-model="currentData.config.label"/>
+        <el-input v-model="currentData.config.label" />
       </el-form-item>
       <el-form-item label="占位提示:">
         <el-input />
@@ -32,8 +37,10 @@ export default {
   },
   watch: {
     currentData: {
-      handler: function () {
-        this.changeConfig();
+      handler: function (val) {
+        if (val.id) {
+          emitter.emit("changeComponent", this.currentData);
+        }
       },
       deep: true,
     },
@@ -42,11 +49,6 @@ export default {
     emitter.on("setComponent", (data) => {
       this.currentData = data;
     });
-  },
-  methods: {
-    changeConfig() {
-      emitter.emit("changeComponent", this.currentData);
-    },
   },
 };
 </script>

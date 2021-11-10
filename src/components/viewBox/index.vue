@@ -1,13 +1,15 @@
 <template>
   <div class="flex-1 view-box">
-    <Menu />
-    <div class="content" v-if="drawList.length !== 0">
+    <Menu @generate="generate"/>
+    <div class="content" v-if="drawList.length > 0">
       <el-form size="mini">
         <el-row>
           <FormItem
             v-for="(item, index) in drawList"
             :data="item"
-            :key="`${item.label}${index}`"
+            :index="index"
+            @deleteItem="deleteItem"
+            :key="`${item.id}`"
           >
           </FormItem>
         </el-row>
@@ -22,6 +24,7 @@ import emitter, { getId } from "@/common/utils.js";
 import FormItem from "./formItem.vue";
 import lodash from "lodash";
 export default {
+  name:'viewComponent',
   data() {
     return {
       drawList: [],
@@ -60,6 +63,14 @@ export default {
       this.currentItem = {};
       this.index = null;
     },
+    deleteItem(index){
+      this.drawList.splice(index,1)
+      this.index=this.drawList.length-1> 0?this.drawList.length-1:null
+      this.currentItem=this.drawList[this.index]?this.drawList[this.index]:{}
+    },
+    generate(data){
+      
+    }
   },
 };
 </script>
@@ -76,7 +87,4 @@ export default {
   }
 }
 
-/deep/ .el-form-item {
-  margin-bottom: 0 !important;
-}
 </style>

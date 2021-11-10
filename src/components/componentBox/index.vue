@@ -28,6 +28,7 @@
         <!-- </el-scrollbar> -->
       </el-tab-pane>
       <el-tab-pane label="表格">Task</el-tab-pane>
+      <el-tab-pane label="模板">Task</el-tab-pane>
     </el-tabs>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="24" class="item-box">
+  <el-col :span="24" class="item-box" @mouseenter="display" @mouseleave="disappear">
     <el-form-item
       :label-width="labelWidth"
       :label="config.showLabel ? config.label : ''"
@@ -8,9 +8,9 @@
       <Render :data="this.data" />
     </el-form-item>
     <div></div>
-    <div class="item-btn">     
-      <el-icon><Plus></Plus></el-icon>
-      <el-icon><Delete></Delete></el-icon>
+    <div class="item-btn" v-if="buttonVisible">     
+      <el-icon color="#409EFC"><Plus></Plus></el-icon>
+      <el-icon color="#F56C6C" @click="deleteItem"><Delete></Delete></el-icon>
     </div>
   </el-col>
 </template>
@@ -19,7 +19,9 @@ import Render from "./render";
 import { Delete, Plus } from "@element-plus/icons";
 export default {
   data() {
-    return {};
+    return {
+      buttonVisible:false
+    };
   },
   components: {
     Render,
@@ -31,6 +33,10 @@ export default {
       type: Object,
       required: true,
     },
+    index:{
+      type:Number,
+      required: true,
+    }
   },
   computed: {
     config: function () {
@@ -44,23 +50,35 @@ export default {
   },
 
   watch: {},
-  methods: {},
+  methods: {
+    deleteItem(){
+      this.$attrs.onDeleteItem(this.index)
+    },
+    display(){
+      this.buttonVisible=true;
+    },
+    disappear(){
+      this.buttonVisible=false
+    }
+  },
 };
 </script>
 <style lang='scss' scoped>
 .item-box {
+  box-sizing: border-box;
   position: relative;
   height: 50px;
-  padding-top: 10px;
-  padding-right: 40px;
+  padding: 10px 5px 0 5px;
 
   &:hover{
-    border: 1px dashed #909399;
+    border: 1px dashed #f56c6c;
+    background-color: #fef0f0;
     cursor: move;
   }
 }
 
 .item-btn {
+  display: inline-block;
   position: absolute;
   top: 15px;
   right: 2px;
@@ -68,6 +86,7 @@ export default {
 
   i{
     cursor: pointer;
+    margin:0 5px;
   }
 }
 </style>
